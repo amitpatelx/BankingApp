@@ -28,3 +28,7 @@ end
 group :test do
   gem 'minitest-spec-rails'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
