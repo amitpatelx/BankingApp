@@ -1,0 +1,23 @@
+.modal.fade.custom-modal{:role => "dialog", :tabindex => "-1", id: "#{operation}Modal"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title= "#{operation.camelize} Money"
+      .modal-body
+        = form_tag send("#{operation.downcase}_path".to_sym) do
+          = hidden_field_tag 'from_account_id', @current_account.id
+          - if operation == Transaction::TRANSFER
+            .row.form-group
+              %label.col-md-3 Transfer to:
+              .col-md-9
+                = select_tag 'to_account_id', bank_account_options, class: 'form-control'
+          .row.form-group
+            %label.col-md-3 Amount:
+            .col-md-9
+              = number_field_tag 'amount', '', class: 'form-control', min: '1', pattern: '[0-9]', step: '1', required: true
+          .row.form-group
+            %label.col-md-3
+            .col-md-9.text-right
+              %input.btn.btn-primary{:type => "submit", :value => operation}/
