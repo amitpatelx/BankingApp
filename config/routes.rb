@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  root to: 'visitors#index'
+  get 'dashboard' => 'accounting#dashboard'
+
+  post 'accounting/deposit'
+  post 'accounting/withdraw'
+
+  root to: 'accounting#dashboard'
 end
