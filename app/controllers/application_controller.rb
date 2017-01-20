@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from InsufficientBalanceError, with: :insufficient_balance
-  rescue_from NegativeAmountError, with: :invalid_amount
+  rescue_from ::InsufficientBalanceError, with: :insufficient_balance
+  rescue_from ::NegativeAmountError, with: :invalid_amount
 
   private
 
