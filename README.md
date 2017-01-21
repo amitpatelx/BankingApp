@@ -3,6 +3,15 @@ BankingApp
 
 This application demonstrate basic banking operations
 
+User can:
+
+1. Deposit money
+2. Get the current balance
+3. With positive balance
+  a. Withdraw money
+  b. Transfer money to another account
+4. Get statement of transactions
+
 Problems? Issues?
 -----------
 

@@ -30,8 +30,13 @@ describe TransferMoney do
   end
 
   describe 'non existing accounts' do
-    it 'should not transfer amount' do
-      lambda { TransferMoney.new(-1).call(to_account_id: -2, amount: -10) }.must_raise(ActiveRecord::RecordNotFound)
+    it 'should not transfer amount if payer account does not exits' do
+      lambda { TransferMoney.new(-1).call(to_account_id: @amit_account.id, amount: 10) }.must_raise(ActiveRecord::RecordNotFound)
     end
+
+    it 'should not transfer amount if payer account does not exits' do
+      lambda { TransferMoney.new(@amit_account.id).call(to_account_id: -1, amount: 10) }.must_raise(ActiveRecord::RecordNotFound)
+    end
+
   end
 end
