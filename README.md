@@ -38,8 +38,6 @@ Getting Started
 Credits
 -------
 
-[BoTree Technologies](http://www.botreetechnologies.com)
-
 License
 -------
 
