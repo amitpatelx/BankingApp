@@ -7,9 +7,8 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = csrf_meta_tags
-  %body
+  %body{"ng-app" => "bankTransferApp", "ng-controller" => "transferCtrl"}
     %header
       = render 'layouts/navigation'
-    %main{:role => "main"}
-      = render 'layouts/messages'
-      = yield
+    = render 'layouts/messages'
+    = yield

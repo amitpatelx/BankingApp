@@ -39,3 +39,7 @@ body {
 .logo a {
     color: #000;
 }
+.modal-body{
+  display: inline-table !important;
+  width: 100% !important
+}

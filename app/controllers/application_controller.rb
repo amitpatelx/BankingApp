@@ -8,18 +8,40 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ::InsufficientBalanceError, with: :insufficient_balance
   rescue_from ::NegativeAmountError, with: :invalid_amount
+  skip_before_action :verify_authenticity_token
 
   private
 
-    def not_found
-      redirect_to root_path, alert: 'The resource you are looking for does not exists'
-    end
+  def not_found
+    response_json = return_response.merge!({
+      success: false,
+      message: "The resource you are looking for does not exists",
+    })
+    render json: response_json
+  end
 
-    def insufficient_balance
-      redirect_to root_path, alert: 'There is not enough balance in your account'
-    end
+  def insufficient_balance
+    response_json = return_response.merge!({
+      success: false,
+      message: 'There is not enough balance in your account',
+    })
+    render json: response_json
+  end
 
-    def invalid_amount
-      redirect_to root_path, alert: 'Please enter valid amount'
-    end
+  def invalid_amount
+    response_json = return_response.merge!({
+      success: false,
+      message: 'Please enter valid amount'
+    })
+    render json: response_json
+  end
+
+  def return_response
+    {
+      current_balance: @current_account.current_balance,
+      users: BankAccount.all.as_json,
+      current_account: @current_account.as_json,
+      account_details: @current_account.transactions.as_json
+    }
+  end
 end
