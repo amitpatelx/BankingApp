@@ -1,6 +1,7 @@
 var mainApp = angular.module("bankTransferApp", []);
 
-mainApp.controller("transferCtrl", function($scope, $http) {
+mainApp.controller("transferCtrl",['$scope','$http', function($scope, $http) {
+
   $scope.availableBalance = 0;
   $scope.users = [];
   $scope.currentUser = "";
@@ -108,4 +109,4 @@ mainApp.controller("transferCtrl", function($scope, $http) {
     $scope.prepareDashboardData(response);
     $scope.filterTransferAccount($scope.currentUser.id);
   });
-});
+}]);
